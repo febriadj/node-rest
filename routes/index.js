@@ -1,18 +1,22 @@
 'use strict'
 
-const { getProducts } = require('../controllers/getProducts')
-const { postProducts } = require('../controllers/postProducts')
+const 
+  { getProducts } = require('../controllers/getProducts')
+, { postProducts } = require('../controllers/postProducts')
+, { deleteProducts } = require('../controllers/deleteProducts')
 
-const routes = async function(req, res) {
-  if (req.url == '/products' && req.method == 'GET') {
-    const execution = await getProducts(req, res) // include getProducts controllers
-    return execution
+module.exports = async function routes(req, res) {
+  const endpoint = req.url == '/products'
+
+  if (endpoint && req.method == 'GET') {
+    await getProducts(req, res) // include getProducts controllers
   }
 
-  if (req.url == '/products' && req.method == 'POST') {
-    const execution = await postProducts(req, res)
-    return execution
+  if (endpoint && req.method == 'POST') {
+    await postProducts(req, res)
+  }
+
+  if (endpoint + '/:id' && req.method == 'DELETE') {
+    await deleteProducts(req, res)
   }
 }
-
-module.exports = routes
