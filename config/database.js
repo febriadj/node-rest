@@ -4,9 +4,10 @@ const mongoose = require('mongoose')
 const uri = process.env.MONGO_URI
 
 const options = {
+  useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useNewUrlParser: true
+  useFindAndModify: false
 }
 
 module.exports = async function runMongo() {
