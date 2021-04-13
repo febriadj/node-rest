@@ -4,6 +4,7 @@ const
   { getProducts } = require('../controllers/getProducts')
 , { postProducts } = require('../controllers/postProducts')
 , { deleteProducts } = require('../controllers/deleteProducts')
+, { updateProducts } = require('../controllers/updateProducts')
 
 module.exports = async function routes(req, res) {
   const endpoint = req.url == '/products'
@@ -18,5 +19,9 @@ module.exports = async function routes(req, res) {
 
   if (endpoint + '/:id' && req.method == 'DELETE') {
     await deleteProducts(req, res)
+  }
+
+  if (endpoint + '/:id' && req.method == 'PUT') {
+    await updateProducts(req, res)
   }
 }
