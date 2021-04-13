@@ -4,7 +4,7 @@ const Products = require('../models/products')
 
 exports.getProducts = async function(req, res) {
   try {
-    const products = await Products.find()
+    const products = await Products.find().sort({ createdAt: - 1 })
 
     res.statusCode = 200
     res.end(JSON.stringify(products))
